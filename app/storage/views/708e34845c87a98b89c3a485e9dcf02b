@@ -1,0 +1,8 @@
+<h3 class="title"><?php echo trans('like.people-like'); ?></h3>
+
+<div class="user-list">
+    <?php foreach($likes as $like): ?>
+
+        <?php echo Theme::section('user.display', ['user' => $like->user, 'mini' => true]); ?>
+    <?php endforeach; ?>
+</div>

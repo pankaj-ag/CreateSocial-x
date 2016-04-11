@@ -1,0 +1,63 @@
+<div class="media clearfix" style="overflow: visible">
+    <?php
+
+    if (isset($uniqueId)) {
+        $cloneId = $uniqueId;
+    }
+    $uniqueId = (isset($uniqueId)) ? $uniqueId : $typeId;
+    ?>
+
+    <div class="media-body" style="overflow: visible;content:'';
+
+ display:block;">
+        <form <?php echo (isset($cloneId)) ? 'data-cloneid="'.$cloneId.'"' : null; ?> id="reply-form-<?php echo $type; ?>-<?php echo $uniqueId; ?>" data-type="<?php echo $type; ?>" class="clearfix" data-id="<?php echo $typeId; ?>" enctype="multipart/form-data" action="" method="post">
+            <input data-type="<?php echo $type; ?>" data-id="<?php echo $uniqueId; ?>" id="<?php echo $uniqueId; ?>-reply-input" autocomplete="off" data-target="#<?php echo $typeId; ?>-hashtag-mention-suggestion" data-text-limit="<?php echo Config::get('post-text-limit'); ?>" data-counter-target="#<?php echo $typeId; ?>-text-counter" class="mention <?php echo (Config::get('enable-post-text-limit')) ? 'post-text-limit' : null; ?>" type="text" placeholder="<?php echo trans('comment.post-a-comment'); ?>"/>
+            <input type="hidden" name="val[type]" value="<?php echo $type; ?>"/>
+            <input type="hidden" name="val[type_id]" value="<?php echo $typeId; ?>"/>
+            <div class="actions">
+
+            </div>
+
+            <div class="real-comment-form">
+                <textarea data-height="30" style="height: 50px" id="<?php echo $uniqueId; ?>-reply-textarea" data-target="#<?php echo $uniqueId; ?>-hashtag-mention-suggestion" data-text-limit="<?php echo Config::get('post-text-limit'); ?>" data-counter-target="#<?php echo $uniqueId; ?>-text-counter" class="mention <?php echo (Config::get('enable-post-text-limit')) ? 'post-text-limit' : null; ?>"  name="val[text]" placeholder="<?php echo trans('comment.post-a-comment'); ?>" ></textarea>
+                <div class="hashtag-mention-suggestion" id="<?php echo $uniqueId; ?>-hashtag-mention-suggestion" style="position: relative">
+                    <div class="listing"></div>
+                </div>
+                <div class="reply-footer">
+                    <button class="btn btn-success btn-sm"><?php echo trans('global.reply'); ?></button>
+                    <a data-type="<?php echo $type; ?>" data-id="<?php echo $uniqueId; ?>" href="" class="btn btn-danger btn-sm cancel-reply-form"><?php echo trans('global.cancel'); ?></a>
+
+
+                    <?php if(Config::get('enable-emoticon')): ?>
+
+                    <a class="emoticon-selector" href="javascript:void(0)">
+                        <img style="display: inline-block;width: 15px;margin: 3px auto" src="<?php echo Theme::asset()->img('theme/images/emoticon.png'); ?>"/>
+                    </a>
+                    <div class="" style="display: none">
+
+                        <?php foreach(Theme::option()->get('emoticons') as $code => $details): ?>
+                        <a title="<?php echo $details['title']; ?>" data-target="#<?php echo $uniqueId; ?>-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code="<?php echo $code; ?>" class="each-emoticon-selector"><img src="<?php echo $details['image']; ?>"/> </a>
+                        <?php endforeach; ?>
+                    </div>
+
+                    <?php endif; ?>
+                        <span  class=" fileupload fileupload-exists" data-provides="fileupload">
+
+                                  <a  class="btn-file btn">
+                                      <span class="fileupload-new"><i class="icon ion-android-camera"></i></span>
+                                      <span class="fileupload-exists"><i class="icon ion-android-camera"></i></span>
+                                      <input title="" class="" type="file" name="image">
+                                  </a>
+                        </span>
+
+                    <?php if(Config::get('enable-post-text-limit')): ?>
+                    <span style="margin:0" id="<?php echo $uniqueId; ?>-text-counter" class="post-text-counter"><?php echo Config::get('post-text-limit'); ?></span>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+

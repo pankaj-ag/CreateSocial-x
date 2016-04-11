@@ -1,0 +1,26 @@
+<div id="preview-card" class="box box-preview-card">
+
+    <div class="cover">
+        <a href="<?php echo $loggedInUser->present()->url(); ?>" data-ajaxify="true">
+            <img  src="<?php echo (!empty($loggedInUser->cover)) ? $loggedInUser->present()->coverImage() : Theme::asset()->img('theme/images/profile-cover.jpg'); ?>"/>
+        </a>
+    </div>
+   
+    <div  class="media">
+                    <div class="media-object pull-left">
+                        <a href="<?php echo $loggedInUser->present()->url(); ?>" data-ajaxify="true">
+                            <img src="<?php echo $loggedInUser->present()->getAvatar(150); ?>"/>
+                        </a>
+                    </div>
+                    <div class="media-body">
+
+                        <h4 class="media-heading"><?php echo $loggedInUser->fullname; ?></h4>
+                        <span>@ <?php echo $loggedInUser->username; ?></span>
+                    </div>
+                </div>
+
+
+</div>
+
+<?php echo Theme::section('user.action-buttons'); ?>
+<?php echo Theme::extend('user-side-preview-card'); ?>

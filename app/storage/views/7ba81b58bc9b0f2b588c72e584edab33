@@ -1,0 +1,11 @@
+<?php $details = $post->present()->getAutoPost();?>
+<i class="icon ion-ios7-arrow-thin-right"></i>
+<?php if($details['type'] == 'change-avatar'): ?>
+    <?php echo trans('post.change-profile-photo'); ?>
+<?php elseif($details['type'] == 'add-photos'): ?>
+     <?php echo trans('post.added-photos', ['count' => count($post->present()->getAutoPostPhotos())]); ?>
+<?php elseif($details['type'] == 'like-page' and $details['page']): ?>
+    <?php echo trans('like.liked'); ?> <a href="<?php echo $details['page']->present()->url(); ?>"><?php echo $details['page']->title; ?></a>
+<?php elseif($details['type'] == 'like-game' and $details['game']): ?>
+<?php echo trans('like.liked'); ?> <a href="<?php echo $details['game']->present()->url(); ?>"><?php echo $details['game']->title; ?></a>
+<?php endif; ?>

@@ -1,0 +1,24 @@
+<div class="album">
+    <a data-ajaxify="true" href="<?php echo $album->user->present()->url('album/'.$album->slug); ?>" class="default-photo">
+        <img src="<?php echo $album->defaultPhoto(); ?>"/>
+    </a>
+    <div class="info">
+        <h3 class="" id="album-title-<?php echo $album->id; ?>"><?php echo Str::limit(ucwords($album->title), 23); ?></h3>
+        <form style="display: none" data-album-id="<?php echo $album->id; ?>" method="post" action="" class="photo-album-edit-form" id="photo-album-edit-form-<?php echo $album->id; ?>">
+            <input style="margin-bottom:3px" type="text" class="form-control input-sm" value="<?php echo $album->title; ?>"/>
+            <button class="btn btn-xs btn-default"><?php echo trans('global.save'); ?></button>
+            <button  data-album-id="<?php echo $album->id; ?>" class="btn photo-album-edit-cancel-button btn-xs btn-danger"><?php echo trans('global.cancel'); ?></button>
+        </form>
+        <i class="icon ion-ios7-photos-outline"></i> <?php echo $album->countPhotos(); ?> <?php echo trans('photo.photos'); ?>
+
+        <?php if ( (Auth::check() and $album->user->id == \Auth::user()->id) or (\Auth::check() and \Auth::user()->isAdmin())): ?>
+            <?php if($album->slug != 'profile-photos' and $album->slug != 'posts'): ?>
+                | <a href="<?php echo URL::route('delete-album', ['id' => $album->id]); ?>"><?php echo trans('global.delete'); ?></a>
+                | <a href="" data-album-id="<?php echo $album->id; ?>" class="photo-album-edit-button"><?php echo trans('photo.edit-album'); ?></a>
+            <?php else: ?>
+
+            <?php endif; ?>
+        <?php endif; ?>
+    </div>
+
+</div>

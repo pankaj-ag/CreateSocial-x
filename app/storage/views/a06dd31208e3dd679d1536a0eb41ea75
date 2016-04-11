@@ -1,0 +1,14 @@
+<?php $counter = 0;?>
+<?php foreach($posts as $post): ?>
+<?php if(Cache::has('post-'.$post->id)): ?>
+<?php echo Cache::get('post-'.$post->id); ?>
+<?php else: ?>
+<?php
+$postContent = (String) Theme::section('post.media', ['post' => $post]);
+if (Config::get('enable-query-cache', 0)) Cache::add('post-'.$post->id, $postContent, Config::get('post-cache-time-out', 3));
+?>
+<?php echo $postContent; ?>
+<?php endif; ?>
+<?php echo Theme::extend('timeline-post-'.$counter); ?>
+<?php  $counter++?>
+<?php endforeach; ?>

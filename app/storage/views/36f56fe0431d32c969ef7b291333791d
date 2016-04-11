@@ -1,0 +1,18 @@
+<div class="user media user-mini notification <?php echo $notification->id; ?>-notification">
+      <div class="media-object pull-left">
+            <a href="<?php echo $notification->user->present()->url(); ?>" data-ajaxify="true"><img src="<?php echo $notification->user->present()->getAvatar(100); ?>"/></a>
+      </div>
+      <div class="media-body">
+           <h5 class="media-heading">
+               <i class="icon ion-speakerphone"></i>
+               <a href="<?php echo $notification->user->present()->url(); ?>"><?php echo $notification->user->fullname; ?> </a> <?php echo trans('notification.like-your'); ?> <a data-ajaxify="true" href="<?php echo URL::route('post-page', ['id' => $post->id]); ?>">post</a>
+           </h5>
+
+          <span><?php echo trans($notification->content); ?></span>
+          <span class="post-time"> <i class="icon ion-ios7-time-outline"></i> <span title="<?php echo $notification->present()->time(); ?>"><?php echo $notification->created_at; ?></span></span>
+           <div class="action-buttons">
+                <a data-id="<?php echo $notification->id; ?>" class="delete-button" href=""><i class="icon ion-close"></i></a>
+           </div>
+      </div>
+
+</div>

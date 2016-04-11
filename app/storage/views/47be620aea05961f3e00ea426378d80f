@@ -1,0 +1,34 @@
+<?php $pages = app('App\\Repositories\\PageRepository')->suggest(2)?>
+
+<?php if(count($pages)): ?>
+
+<div class="box">
+    <div class="box-title"><?php echo trans('page.you-may-like'); ?></div>
+    <div class="box-content">
+
+        <?php foreach($pages as $page): ?>
+
+        <div class=" user media media">
+            <div class="media-object pull-left">
+                <a   href="<?php echo $page->present()->url(); ?>" data-ajaxify="true"><img src="<?php echo $page->present()->getAvatar(150); ?>"/></a>
+            </div>
+            <div class="media-body">
+                <h5 class="media-heading"><?php echo $page->title; ?> </h5>
+
+                <p>
+                    <i class="icon ion-thumbsup"></i> <span class="post-like-count-<?php echo $page->id; ?>"><?php echo $page->countLikes(); ?></span> <?php echo trans('like.likes'); ?>
+                </p>
+                <div class="action-buttons">
+                    <?php $hasLike = $page->hasLiked()?>
+
+                    <a  data-is-login="<?php echo Auth::check(); ?>" data-status="<?php echo ($hasLike) ? '1' : 0; ?>" class="btn btn-default btn-xs like-button" data-like="<?php echo trans('like.like'); ?>" data-unlike="<?php echo trans('like.unlike'); ?>" data-id="<?php echo $page->id; ?>" data-type="page" href=""><i class="icon ion-ios7-heart"></i> <span><?php echo ($hasLike) ? trans('like.unlike') : trans('like.like'); ?></span></a>
+
+                </div>
+            </div>
+        </div>
+
+        <?php endforeach; ?>
+
+    </div>
+</div>
+<?php endif; ?>

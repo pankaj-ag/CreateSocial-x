@@ -1,0 +1,23 @@
+<?php $details = $post->present()->getAutoPost();?>
+
+<?php if($details['type'] == 'change-avatar'): ?>
+    <div class=" one-image" >
+
+        <a class="preview-image post-thumb-one-image" rel="<?php echo $post->id; ?>-images" href="<?php echo Image::url($details['avatar'], '600'); ?>"><img src="<?php echo Image::url($details['avatar'], 600); ?>"/></a>
+
+    </div>
+<?php elseif($details['type'] == 'add-photos'): ?>
+    <?php $photos = $post->present()->getAutoPostPhotos()?>
+    <div class=" <?php echo (count($photos) > 1) ? 'post-images' : 'one-image'; ?>" >
+
+        <?php foreach($photos as $photo): ?>
+<h1>myphoto</h1>
+        <a class="preview-image  <?php echo (count($photos) > 1) ? 'post-thumb-image' : 'post-thumb-one-image'; ?>" rel="<?php echo $post->id; ?>-images" href="<?php echo Image::url($photo, '600'); ?>"><img src="<?php echo Image::url($photo, 600); ?>"/></a>
+        <?php endforeach; ?>
+
+    </div>
+<?php elseif($details['type'] == 'like-page'): ?>
+    <?php echo Theme::section('page.display', ['page' => $details['page']]); ?>
+<?php elseif($details['type'] == 'like-game'): ?>
+<?php echo Theme::section('game.display', ['game' => $details['game']]); ?>
+<?php endif; ?>

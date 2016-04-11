@@ -1,0 +1,21 @@
+<?php if(!count($users)): ?>
+    <p><?php echo trans('message.no-friends'); ?></p>
+<?php endif; ?>
+
+<?php foreach($users as $user): ?>
+    <a
+        data-userid = "<?php echo $user->id; ?>"
+        data-link = "<?php echo $user->present()->url(); ?>"
+        data-name = "<?php echo str_limit($user->present()->fullName(), 100); ?>"
+        href="<?php echo URL::route('messages'); ?>?user=<?php echo $user->username; ?>">
+        <div class="media">
+            <div class="media-object pull-left">
+                <img src="<?php echo $user->present()->getAvatar(50); ?>"/>
+            </div>
+            <div class="media-body">
+                <h4><?php echo $user->fullname; ?> <?php echo Theme::section('user.verified', ['user' => $user]); ?></h4>
+
+            </div>
+        </div>
+    </a>
+<?php endforeach; ?>

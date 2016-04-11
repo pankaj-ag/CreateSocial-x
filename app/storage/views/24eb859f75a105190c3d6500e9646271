@@ -1,0 +1,248 @@
+<?php if($post->user and $post->present()->isGood()): ?>
+
+
+<div id="post-<?php echo $post->id; ?>" <?php echo $post->type; ?> <?php echo $post->content_type; ?> <?php echo $post->page_id; ?> <?php echo $post->community_id; ?>  class="post-media user-post-<?php echo $post->user->id; ?> clearfix">
+    <?php echo Theme::section('post.header', ['post' => $post]); ?>
+    <!--original owner of post incase of shared-->
+    <?php if(!empty($post->shared) and $post->sharedUser): ?>
+    <div class="media original-poster">
+        <div class="media-object pull-left"><img src="<?php echo $post->sharedUser->present()->getAvatar(50); ?>"/> </div>
+        <div class="media-body">
+            <h5 class="media-heading"><?php echo $post->sharedUser->fullname; ?> <span><?php echo $post->sharedUser->present()->atName(); ?></span> <?php echo trans('post.originally-post-this'); ?></h5>
+        </div>
+    </div>
+    <?php endif; ?>
+
+    <div class="post-body">
+
+
+        <div id="post-text-content-<?php echo $post->id; ?>" class="post-text-content">
+            <h1>helooo</h1>
+
+            <?php if($post->present()->hasTooMuchText()): ?>
+            <?php echo $post->present()->text(Str::limit($post->text, Config::get('post-text-max-show'))); ?>
+            <div class="hidden" id="full-text-content-<?php echo $post->id; ?>"><?php echo $post->present()->text(); ?></div>
+            <a href="" class="post-read-more" data-id="<?php echo $post->id; ?>" data-content=""><?php echo trans('post.read-more'); ?></a>
+            <?php else: ?>
+            <?php echo $post->present()->text(); ?>
+            <?php endif; ?>
+
+            <?php echo Theme::extend('inline-post-text', ['post' => $post]); ?>
+
+        </div>
+
+
+        <?php if($post->present()->canDelete()): ?>
+        <div id="post-inline-editor-<?php echo $post->id; ?>" class="post-inline-editor clearfix">
+            <form  action="" method="post">
+                <textarea name="text" ><?php echo $post->text; ?></textarea>
+                <div class="pull-right">
+                    <button data-text="<?php echo $post->text; ?>" data-edited="<?php echo trans('post.edited'); ?>" data-id="<?php echo $post->id; ?>" class="save-post-inline-editor btn btn-success btn-xs"><?php echo trans('post.done-editing'); ?></button>
+                    <a data-id="<?php echo $post->id; ?>" class="cancel-post-inline-editor btn btn-default btn-xs"><?php echo trans('post.cancel'); ?></a>
+                </div>
+            </form>
+        </div>
+        <?php endif; ?>
+
+        <?php if($post->present()->isAutoPost()): ?>
+        <?php echo Theme::section('post.auto-post.body', ['post' => $post]); ?>
+        <?php endif; ?>
+  
+
+        <?php if($post->content_type == 'image'): ?>
+        <div class=" <?php echo ($post->present()->hasOneImage()) ? 'one-image' : 'post-images'; ?>" >
+            <?php foreach($post->present()->images() as $image): ?>
+            <?php if(!empty($image)): ?>
+                <?php if($post->present()->hasOneImage()): ?>
+                    <a class="preview-image post-thumb-one-image" rel="<?php echo $post->id; ?>-images" href="<?php echo Image::url($image, '600'); ?>"><img src="<?php echo Image::url($image, 600); ?>"/></a>
+                <?php else: ?>
+                    <a class="preview-image post-thumb-image " rel="<?php echo $post->id; ?>-images" href="<?php echo Image::url($image, '600'); ?>"><img src="<?php echo Image::url($image, 600); ?>"/></a>
+                <?php endif; ?>
+
+            <?php endif; ?>
+            <?php endforeach; ?>
+        </div>
+        <?php elseif($post->content_type == 'video' and $videoUrl = $post->present()->getVideoUrl()): ?>
+        <div class="load-video" data-url="<?php echo $videoUrl; ?>"></div>
+
+        <?php elseif($post->content_type == 'audio' and $audioLink = $post->present()->getSoundCloudUrl()): ?>
+
+        <div class="load-sound" data-url="<?php echo $audioLink; ?>"></div>
+
+        <?php elseif($post->content_type == 'location' and $location = $post->present()->getLocation()): ?>
+
+
+        <img class="post-location-image" src="https://maps.googleapis.com/maps/api/staticmap?center=<?php echo $location; ?>&zoom=15&size=700x300&maptype=roadmap&markers=color:red%7C<?php echo $location; ?>&sensor=false&scale=1&visual_refresh=true"/>
+
+
+        <?php elseif($post->content_type == 'movie' and $movie = $post->present()->generalMediaValue()): ?>
+
+            <?php if(!empty($movie)): ?>
+            <div class="general-media">
+
+                <span><i class="icon ion-coffee"></i> <?php echo trans('post.i-watch'); ?>:</span> <?php echo sanitizeText(str_limit($movie, 60, '')); ?>
+            </div>
+            <?php endif; ?>
+        <?php elseif($post->content_type == 'oembed' and $oembed = $post->present()->getOEmbed()): ?>
+            <div class="oembed-iframe"><?php echo $oembed; ?></div>
+        <?php endif; ?>
+
+        <?php if(!empty($post->video_path)): ?>
+            <iframe allowfullscreen="true" webkitallowfullscreen="true" mozallowfullscreen="true" style="border: none;padding: 0;border-radius: 10px;overflow: hidden" src="<?php echo URL::route('play-video'); ?>?path=<?php echo $post->video_path; ?>" width="100%" height="330"></iframe>
+        <?php endif; ?>
+
+
+        <?php if($post->present()->hasLink()): ?>
+        <?php echo Theme::section('post.link', ['post' => $post]); ?>
+        <?php endif; ?>
+
+        <?php if($post->file_path): ?>
+            <div class="post-file-display media">
+                <div class="media-object pull-left">
+                    <?php $ext = pathinfo($post->file_path, PATHINFO_EXTENSION)?>
+                    <img src="<?php echo Theme::asset()->img('theme/images/file-icons/'.$ext.'.png'); ?>"/>
+                </div>
+
+                <div class="media-body">
+                    <h4><?php echo $post->file_path_name; ?></h4>
+                    <a href="<?php echo URL::route('post-download-file', ['id' => $post->id]); ?>" class="btn btn-primary"><?php echo trans('post.download-file'); ?></a>
+                </div>
+            </div>
+        <?php endif; ?>
+        <?php echo Theme::extend('post-body', [$post]); ?>
+
+        <?php $tags = $post->present()->listTags()?>
+        <?php if(count($tags) > 0): ?>
+        <div class="post-tags">
+
+
+            <span>With : </span>
+            <?php $counter = 0;?>
+            <?php foreach($tags as $taggedUser): ?>
+
+            <?php if($counter <3): ?>
+            <?php $counter +=1?>
+            <a data-ajaxify="true" href="<?php echo $taggedUser->present()->url(); ?>"><?php echo $taggedUser->present()->fullName(); ?></a>,
+            <?php endif; ?>
+
+
+            <?php endforeach; ?>
+
+            <?php if(count($tags) > 3): ?>
+                <span class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown"><i class="icon ion-more"></i> <?php echo trans('global.more'); ?></a>
+                    <ul class="dropdown-menu">
+                        <?php $counter = 0?>
+                        <?php foreach($tags as $taggedUser): ?>
+                        <?php $counter +=1?>
+                        <?php if($counter > 3): ?>
+
+                        <li><a data-ajaxify="true" href="<?php echo $taggedUser->present()->url(); ?>"><?php echo $taggedUser->present()->fullName(); ?></a></li>
+                        <?php endif; ?>
+                        <?php endforeach; ?>
+                    </ul>
+                </span>
+            <?php endif; ?>
+        </div>
+        <?php endif; ?>
+
+    </div>
+
+    <div class="post-footer">
+        <ul class="nav nav-left">
+            <?php if($post->content_type != 'auto-post'): ?>
+            <li><a href="" data-is-login="<?php echo Auth::check(); ?>" class="post-share-button" data-id="<?php echo $post->id; ?>"><i class="icon ion-reply"></i> <span><?php echo trans('post.share'); ?></span></a> </li>
+            <?php endif; ?>
+            <li>
+                <?php $hasLike = $post->hasLiked()?>
+
+                <a data-is-login="<?php echo Auth::check(); ?>" data-status="<?php echo ($hasLike) ? '1' : 0; ?>" class="like-button" data-like="<?php echo trans('like.like'); ?>" data-unlike="<?php echo trans('like.unlike'); ?>" data-id="<?php echo $post->id; ?>" data-type="post" href=""><i class="icon ion-ios7-heart"></i> <span><?php echo ($hasLike) ? trans('like.unlike') : trans('like.like'); ?></span></a>
+            </li>
+            <?php if (Auth::check()): ?>
+            <li>
+                <?php $nStatus = $post->present()->canReceiveNotification()?>
+
+                <a data-userid="<?php echo Auth::user()->id; ?>" data-on="<?php echo trans('notification.on-notifications'); ?>" data-status="<?php echo $nStatus; ?>" data-off="<?php echo trans('notification.off-notifications'); ?>" class="toggle-notification-receiver" data-type="post" data-type-id="<?php echo $post->id; ?>" href="">
+                    <i class="icon ion-ios7-bell-outline"></i>
+
+                        <span>
+                            <?php if ($nStatus): ?>
+                                <?php echo trans('notification.off-notifications'); ?>
+                            <?php else: ?>
+                                <?php echo trans('notification.on-notifications'); ?>
+                            <?php endif; ?>
+                        </span>
+                </a>
+            </li>
+             <li>
+             
+            <?php 
+                    // for add to favorites button
+                    $nStatus = $post->present()->canReceiveNotification()?>
+
+                <a data-userid="<?php echo Auth::user()->id; ?>" data-on="<?php echo trans('newlang.favorite'); ?>" data-status="<?php echo $nStatus; ?>" data-off="<?php echo trans('newlang.favorite'); ?>" class="toggle-notification-receiver favorite" data-type="post" data-type-id="<?php echo $post->id; ?>" href="">
+                    <i class="icon ion-ios7-bell-outline"></i>
+
+                        <span>
+                            <?php if ($nStatus): ?>
+                                <?php echo trans('newlang.favorite'); ?>
+                            <?php else: ?>
+                                <?php echo trans('newlang.favorite'); ?>
+                            <?php endif; ?>
+                        </span>
+                </a>
+            </li>
+            <?php endif; ?>
+        </ul>
+
+        <ul class="nav nav-right pull-right">
+            <?php if($post->content_type != 'auto-post'): ?>
+            <li><a data-id="<?php echo $post->id; ?>" data-loading="<?php echo trans('post.loading'); ?>" class="post-activity-loader" href="<?php echo URL::route('load-shares', ['id' => $post->id]); ?>"><i class="icon ion-reply"></i> <span class="post-share-count-<?php echo $post->id; ?>"><?php echo $post->shared_count; ?></span></a> </li>
+            <?php endif; ?>
+            <li><a data-id="<?php echo $post->id; ?>" data-loading="<?php echo trans('post.loading'); ?>" class="post-activity-loader" href="<?php echo URL::route('show-likes', ['post' => 'post', 'id' => $post->id]); ?>"><i class="icon ion-ios7-heart"></i> <span class="post-like-count-<?php echo $post->id; ?>"><?php echo $post->countLikes(); ?></span></a> </li>
+            <li><a  href="javascript:void(0)"><i class="icon ion-reply-all"></i> <span class="post-reply-count-<?php echo $post->id; ?>"><?php echo $post->countComments(); ?></span></a> </li>
+        </ul>
+
+
+    </div>
+    <div id="post-activity-<?php echo $post->id; ?>" class="post-activity">
+        <?php echo trans('post.loading'); ?>
+    </div>
+    <div class="post-replies" id="<?php echo $post->id; ?>-post-replies" data-limit="3" data-offset="3" data-type="post" data-type-id="<?php echo $post->id; ?>">
+
+        <?php if ($post->countComments() > 3): ?>
+        <a style="" href="" class="load-more-comment" data-target="#<?php echo $post->id; ?>-post-replies">
+            <i class="icon ion-chatbox"></i> <?php echo trans('comment.view-more-comment'); ?> <img class="indicator" src="<?php echo Theme::asset()->img('theme/images/loading.gif'); ?>"/>
+        </a>
+        <?php endif; ?>
+        <div id="post-<?php echo $post->id; ?>-reply-lists" class="replies-list">
+
+            <?php foreach($post->comments->take(3)->reverse() as $comment): ?>
+
+            <?php if ($post->type == 'page' and $post->page->user->id == $comment->user->id): ?>
+            <?php echo Theme::section('comment.display-page', ['comment' => $comment, 'page' => $post->page]); ?>
+            <?php else: ?>
+            <?php echo Theme::section('comment.display', ['comment' => $comment]); ?>
+            <?php endif; ?>
+
+            <?php endforeach; ?>
+        </div>
+        <?php if(Auth::check()): ?>
+        <?php if($post->type == 'page' and ($post->page->present()->isAdmin() or $post->page->present()->isEditor() or $post->page->present()->isModerator())): ?>
+            <?php echo Theme::section('comment.form', ['avatar' => $post->page->present()->getAvatar(100),'typeId' => $post->id, 'type' => 'post']); ?>
+        <?php elseif($post->type == 'community' and $post->community->present()->isMember()): ?>
+            <?php echo Theme::section('comment.form', ['typeId' => $post->id, 'type' => 'post']); ?>
+        <?php else: ?>
+            <?php echo Theme::section('comment.form', ['typeId' => $post->id, 'type' => 'post']); ?>
+        <?php endif; ?>
+        <?php endif; ?>
+
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+<script src="http://localhost/crea8social2/app/storage/assets/favorite.js"></script>
+<?php else: ?>
+
+    <?php $post->delete()?>
+<?php endif; ?>

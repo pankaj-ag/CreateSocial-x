@@ -1,0 +1,4 @@
+<ul class="nav user-action-buttons">
+    <li><a href="<?php echo URL::route('edit-profile'); ?>" data-ajaxify="true"><i class="icon ion-ios7-person"></i> <span><?php echo trans('user.update-profile'); ?></span></a> </li>
+    <li><a href="<?php echo URL::route('user-design'); ?>" data-ajaxify="true"><i class="icon ion-disc"></i> <span><?php echo trans('user.design-profile'); ?></span></a> </li>
+</ul>

@@ -1,0 +1,39 @@
+<div id="footer">
+    <div class="container">
+        <ul class="nav">
+            <li><a href="<?php echo URL::route('terms-and-condition'); ?>"><?php echo trans('home.terms-condition'); ?></a> </li>
+            <li><a href="<?php echo URL::route('privacy'); ?>"><?php echo trans('home.privacy-policy'); ?></a> </li>
+            <li><a href="<?php echo URL::route('disclaimer'); ?>"><?php echo trans('home.disclaimer'); ?></a> </li>
+            <li><a href="<?php echo URL::route('about-us'); ?>"><?php echo trans('home.about-us'); ?></a> </li>
+            <li><a href="<?php echo URL::route('developers'); ?>"><?php echo trans('home.developers'); ?></a> </li>
+            <!--<li><a href="">Contact</a> </li>-->
+        </ul>
+
+        <div class="footer-info">
+                <?php echo trans('home.footer-site-info'); ?>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    paceOptions = {
+        initialRate: 2
+    }
+</script>
+<?php if(Auth::check()): ?>
+    <?php echo Theme::section('messages.chatbox'); ?>
+<?php endif; ?>
+<?php echo Theme::asset()->scripts(); ?>
+
+
+<audio id="update-sound" preload="auto">
+    <source src="<?php echo Theme::asset()->img('theme/sounds/notification.ogg'); ?>" type="audio/ogg">
+    <source src="<?php echo Theme::asset()->img('theme/sounds/notification.mp3'); ?>" type="audio/mpeg">
+    <source src="<?php echo Theme::asset()->img('theme/sounds/notification.wav'); ?>" type="audio/wav">
+</audio>
+
+</body>
+</html>
+
+<?php //print_r(DB::getQueryLog())?>

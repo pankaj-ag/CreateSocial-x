@@ -1,0 +1,13 @@
+<?php if($user->verified == 1): ?>
+    <img src="<?php echo Theme::asset()->img('theme/images/verified.png'); ?>" title="<?php echo $user->fullname; ?> <?php echo trans('global.is-verified'); ?>"/>
+<?php endif; ?>
+
+<?php if ($user->present()->isOnline()): ?>
+    <?php $status = $user->present()->isOnline()?>
+    <?php if($status == 1): ?>
+        <i title="<?php echo $user->fullname; ?> <?php echo trans('user.is-online'); ?>" class="icon ion-record" style="color: #26C281;font-size: 11px"></i>
+    <?php else: ?>
+        <i title="<?php echo $user->fullname; ?> <?php echo trans('message.is-busy'); ?>" class="icon ion-record" style="color: #E38826;font-size: 11px"></i>
+    <?php endif; ?>
+
+<?php endif; ?>

@@ -1,0 +1,68 @@
+
+<?php if($user->countFriends()): ?>
+    <div class="box">
+        <div class="box-title">
+            <?php echo trans('connection.friends'); ?> (<?php echo $user->countFriends(); ?>)
+            <a href="<?php echo $profileUser->present()->url('connection/friends'); ?>" class="pull-right"><i class="icon ion-more"></i> <?php echo trans('global.view-all'); ?></a>
+        </div>
+        <div class="box-content">
+
+            <div class="user-tile-list">
+                <?php foreach($user->friends(8) as $friend): ?>
+                    <?php $friend = $friend->present()->getFriend($user->id)?>
+                    <?php if($friend): ?>
+                        <a data-ajaxify="true" href="<?php echo $friend->present()->url(); ?>"><img src="<?php echo $friend->present()->getAvatar(100); ?>"/> </a>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+
+            </div>
+
+        </div>
+    </div>
+<?php endif; ?>
+
+<?php $followers = $user->followers(4)?>
+<?php if(count($followers)): ?>
+    <div class="box">
+        <div class="box-title">
+            <?php echo trans('connection.followers'); ?>
+            <a href="<?php echo $profileUser->present()->url('connection/followers'); ?>" class="pull-right"><i class="icon ion-more"></i> <?php echo trans('global.view-all'); ?></a><p>hii</p>
+        </div>
+        <div class="box-content">
+
+            <div class="user-tile-list">
+                <?php foreach($followers as $follower): ?>
+                
+                    <?php if($follower->fromUser): ?>
+                            <a data-ajaxify="true" href="<?php echo $follower->fromUser->present()->url(); ?>"><img src="<?php echo $follower->fromUser->present()->getAvatar(100); ?>"/></a>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+
+            </div>
+
+        </div>
+    </div>
+<?php endif; ?>
+
+<?php $followings = $user->following(4)?>
+<?php if(count($followings)): ?>
+    <div class="box">
+        <div class="box-title">
+            <?php echo trans('connection.following'); ?>
+            <a href="<?php echo $profileUser->present()->url('connection/following'); ?>" class="pull-right"><i class="icon ion-more"></i> <?php echo trans('global.view-all'); ?></a>
+        </div>
+        <div class="box-content">
+
+            <div class="user-tile-list">
+                <?php foreach($followings as $followedUser): ?>
+
+                    <?php if($followedUser->toUser): ?>
+                <a data-ajaxify="true" href="<?php echo $followedUser->toUser->present()->url(); ?>"><img src="<?php echo $followedUser->toUser->present()->getAvatar(100); ?>"/> </a><p>helloo</p>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+
+            </div>
+
+        </div>
+    </div>
+<?php endif; ?>

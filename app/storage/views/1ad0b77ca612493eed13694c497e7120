@@ -1,0 +1,72 @@
+<div class="container clearfix">
+    <div class="getstarted-left">
+
+        <div class="content">
+            <h3><?php echo trans('user.welcome'); ?>, <?php echo $loggedInUser->username; ?>.</h3>
+            <p>
+                <?php echo trans('user.getstarted-welcome-note'); ?>
+            </p>
+        </div>
+        <div class="arrow-down"></div>
+
+        <div class="box">
+            <form enctype="multipart/form-data" id="getstarted-form" action="" method="post">
+                <div class="box-content">
+
+
+                    <div class="media">
+                        <div class="media-object pull-left">
+                            <img src="<?php echo $loggedInUser->present()->getAvatar(100); ?>"/>
+                        </div>
+                        <div class="media-body">
+                                    <span style=""  class=" fileupload fileupload-exists" data-provides="fileupload">
+
+                                         <a    class=" btn btn-danger btn-file">
+                                             <span class="fileupload-new"><?php echo trans('user.change-photo'); ?></span>
+                                             <span class="fileupload-exists"><?php echo trans('user.change-photo'); ?></span>
+                                             <input title="" id="getstarted-image-input" class="" type="file" name="image">
+                                         </a>
+
+
+                                     </span>
+
+                                    <p class="help-block"><?php echo trans('user.change-photo-info'); ?></p>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleInputFile"><?php echo trans('user.bio'); ?></label>
+                        <textarea name="bio" class="form-control"><?php echo $loggedInUser->bio; ?></textarea>
+                        <p class="help-block"><?php echo trans('user.bio-info'); ?></p>
+                    </div>
+
+                    <div class="form-group">
+                        <label><?php echo trans('global.city'); ?></label>
+                        <input class="form-control" type="text" name="city" placeholder="<?php echo trans('global.your-city'); ?>"/>
+                    </div>
+
+                    <?php echo Theme::extend("getstarted-left-extend"); ?>
+                </div>
+
+                <div class="getstarted-footer">
+                    <input type="submit" class="btn-success btn-sm btn" value="<?php echo trans('global.save'); ?>">
+
+                    <button class="btn btn-danger btn-sm pull-right"><?php echo trans('global.skip'); ?></button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="getstarted-right">
+        <h2 class="title"><?php echo trans('user.see-who-here'); ?>
+            <span><?php echo trans('user.see-who-here-info'); ?></span>
+        </h2>
+        <div class="member-container">
+
+        </div>
+
+        <div class="getstarted-footer">
+            <a disabled="disabled" id="gestarted-continue-button" href="<?php echo URL::route('getstarted.finish'); ?>" class="btn btn-default"><?php echo trans('global.continue'); ?></a>
+        </div>
+    </div>
+</div>

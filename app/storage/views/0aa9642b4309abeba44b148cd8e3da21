@@ -1,0 +1,5 @@
+<?php if($type == 'post'): ?>
+<?php echo Theme::section('notification.comment.post', ['notification' => $notification, 'typeId' => $typeId, 'type' => $type]); ?>
+<?php elseif($type == 'photo'): ?>
+    <?php echo Theme::section('notification.comment.photo', ['notification' => $notification, 'typeId' => $typeId, 'type' => $type]); ?>
+<?php endif; ?>

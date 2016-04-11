@@ -1,0 +1,69 @@
+<?php foreach($hashtags as $hashtag): ?>
+    <a href="<?php echo $hashtag->url(); ?>" data-ajaxify="true"><?php echo $hashtag->hash; ?></a>
+<?php endforeach; ?>
+
+<?php foreach($users as $user): ?>
+<?php echo Theme::section('user.display', ['user' => $user, 'mini' => true, 'actions' => false]); ?>
+<?php endforeach; ?>
+
+<?php foreach($pages as $page): ?>
+    <div class=" user media user-mini">
+        <div class="media-object pull-left">
+            <a  href="<?php echo $page->present()->url(); ?>" data-ajaxify="true"><img src="<?php echo $page->present()->getAvatar(100); ?>"/></a>
+        </div>
+        <div class="media-body">
+            <h5 class="media-heading"><?php echo $page->title; ?> <?php echo Theme::section('page.verified', ['page' => $page]); ?> </h5>
+            <p>
+                <i class="icon ion-thumbsup"></i> <span class="post-like-count-<?php echo $page->id; ?>"><?php echo $page->countLikes(); ?></span> Likes
+            </p>
+            <div class="action-buttons">
+                <?php $hasLike = $page->hasLiked()?>
+
+                <a  data-is-login="<?php echo Auth::check(); ?>" data-status="<?php echo ($hasLike) ? '1' : 0; ?>" class="btn btn-default btn-xs like-button" data-like="Like" data-unlike="Unlike" data-id="<?php echo $page->id; ?>" data-type="page" href=""><i class="icon ion-ios7-heart"></i> <span><?php echo ($hasLike) ? 'Unlike' : 'Like'; ?></span></a>
+
+            </div>
+
+        </div>
+    </div>
+<?php endforeach; ?>
+
+<?php foreach($communities as $community): ?>
+    <div class=" user media user-mini">
+        <div class="media-object pull-left">
+            <a  href="<?php echo $community->present()->url(); ?>" data-ajaxify="true"><img src="<?php echo $community->present()->getLogo(100); ?>"/></a>
+        </div>
+        <div class="media-body">
+            <h5 class="media-heading"><?php echo $community->title; ?> <?php echo Theme::section('community.verified', ['community' => $community]); ?> </h5>
+            <p>
+                <?php echo count($community->members) + 1; ?> Members | <?php echo count($community->posts); ?> Posts
+            </p>
+            <div class="action-buttons">
+
+            </div>
+
+        </div>
+    </div>
+
+<?php endforeach; ?>
+
+<?php foreach($games as $game): ?>
+<div class=" user media user-mini">
+    <div class="media-object pull-left">
+        <a  href="<?php echo $game->present()->url(); ?>" data-ajaxify="true"><img src="<?php echo $game->present()->getAvatar(100); ?>"/></a>
+    </div>
+    <div class="media-body">
+        <h5 class="media-heading"><?php echo $game->title; ?> <?php echo Theme::section('game.verified', ['game' => $game]); ?> </h5>
+
+        <p>
+            <i class="icon ion-thumbsup"></i> <span class="post-like-count-<?php echo $game->id; ?>"><?php echo $game->countLikes(); ?></span> Likes
+        </p>
+        <div class="action-buttons">
+            <?php $hasLike = $game->hasLiked()?>
+
+            <a  data-is-login="<?php echo Auth::check(); ?>" data-status="<?php echo ($hasLike) ? '1' : 0; ?>" class="btn btn-default btn-xs like-button" data-like="Like" data-unlike="Unlike" data-id="<?php echo $game->id; ?>" data-type="game" href=""><i class="icon ion-ios7-heart"></i> <span><?php echo ($hasLike) ? 'Unlike' : 'Like'; ?></span></a>
+
+        </div>
+    </div>
+</div>
+
+<?php endforeach; ?>

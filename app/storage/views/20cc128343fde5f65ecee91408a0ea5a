@@ -1,0 +1,55 @@
+<?php if($comment->user): ?>
+<div id="reply-<?php echo $comment->id; ?>" class="reply media reply-<?php echo $comment->id; ?>">
+    <div class="media-object pull-left">
+        <a href="<?php echo $comment->user->present()->url(); ?>" data-ajaxify="true"><img src="<?php echo $comment->user->present()->getAvatar(50); ?>"/></a>
+    </div>
+    <div class="media-body">
+        <h5 class="media-heading">
+            <a href="<?php echo $comment->user->present()->url(); ?>" data-ajaxify="true"><?php echo $comment->user->present()->fullName(); ?></a>
+
+
+            <span><?php echo $comment->user->present()->atName(); ?> <?php echo Theme::section('user.verified', ['user' => $comment->user]); ?></span></h5>
+
+        <?php if ($comment->present()->canDelete()): ?>
+        <a  data-type="<?php echo $comment->type; ?>" data-type-id="<?php echo $comment->type_id; ?>" data-warning="<?php echo trans('comment.confirm-delete'); ?>" class="delete-button" data-id="<?php echo $comment->id; ?>" href=""><i class="icon ion-close"></i></a>
+        <?php endif; ?>
+
+        <span class="comment-text" id="<?php echo $comment->id; ?>-comment-text"><?php echo $comment->present()->text(); ?></span><br/>
+        <?php if ($comment->present()->canDelete()): ?>
+            <div style="display:none" id="comment-inline-editor-<?php echo $comment->id; ?>" class="comment-inline-editor clearfix">
+                <form  action="" method="post">
+                    <textarea name="text" ><?php echo $comment->text; ?></textarea>
+                    <br/><br/>
+                    <div class="pull-right">
+                        <a href="" data-text="<?php echo $comment->text; ?>" data-id="<?php echo $comment->id; ?>" class="comment-edit-save-button btn btn-success btn-xs"><?php echo trans('post.done-editing'); ?></a>
+                        <a data-id="<?php echo $comment->id; ?>" class="cancel-inline-editor btn btn-default btn-xs"><?php echo trans('post.cancel'); ?></a>
+                    </div>
+                </form>
+            </div>
+        <?php endif; ?>
+
+        <?php if($image = $comment->present()->getImage()): ?>
+        <a class="reply-image preview-image" href="<?php echo Image::url($image, '600'); ?>"><img src="<?php echo Image::url($image, 600); ?>"/> </a>
+
+        <?php endif; ?>
+        <span class="post-time"><i class="icon ion-ios7-time-outline"></i> <span title="<?php echo $comment->present()->time(); ?>"><?php echo formatDTime($comment->created_at); ?></span></span>
+        <i style="font-size: 15px;color: #828282" class="icon ion-thumbsup"></i>
+        <span id="comment-like-count-<?php echo $comment->id; ?>">
+            <?php $countLikes = $comment->countLikes()?>
+            <?php if($countLikes): ?>
+                <?php echo $countLikes; ?>
+            <?php endif; ?>
+        </span>
+        <?php $hasLike = $comment->hasLiked()?>
+
+        <a data-target="#comment-like-count-<?php echo $comment->id; ?>" data-is-login="<?php echo Auth::check(); ?>" data-status="<?php echo ($hasLike) ? '1' : 0; ?>" class="like-button" data-like="<?php echo trans('like.like'); ?>" data-unlike="<?php echo trans('like.unlike'); ?>" data-id="<?php echo $comment->id; ?>" data-type="comment" href=""> <span><?php echo ($hasLike) ? trans('like.unlike') : trans('like.like'); ?></span></a>
+        <!--<a href="">Like</a>-->
+        <?php if ($comment->present()->canDelete()): ?>
+            <a data-comment-id="<?php echo $comment->id; ?>" class="comment-edit-button" href=""><i class="icon ion-edit"></i> <?php echo trans('global.edit'); ?></a>
+        <?php endif; ?>
+
+    </div>
+</div>
+<?php else: ?>
+    <?php $comment->delete()?>
+<?php endif; ?>

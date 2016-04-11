@@ -1,0 +1,17 @@
+<div class="container page-content clearfix">
+
+        <div class="left-column">
+            <?php echo Theme::extend('timeline-before-post-editor'); ?>
+
+            <?php echo Theme::section('post.editor.main'); ?>
+
+            <?php echo Theme::extend('timeline-after-post-editor'); ?>
+            <?php Theme::widget()->add('user.home.feeds', ['user-feeds'] )?>
+            <?php echo Theme::widget()->get('user-feeds'); ?>
+        </div>
+
+        <div class="right-column">
+            <?php echo Theme::section('user.side-info'); ?>
+            <?php echo Theme::widget()->get('user-home'); ?>
+        </div>
+    </div>

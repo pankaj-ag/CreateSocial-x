@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="en">
+
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description" content="<?php echo $site_description; ?>">
+        <meta name="keywords" content="<?php echo $site_keywords; ?>">
+        <!--SEO--->
+        <meta property="og:title" content="<?php echo $ogTitle; ?>" />
+        <meta property="og:image" url="<?php echo $ogImage; ?>" />
+        <meta property="og:description" content="<?php echo $site_description; ?>"/>
+        <meta property="og:type" content="<?php echo $ogType; ?>"/>
+        <meta property="og:url" content="<?php echo $ogUrl; ?>"/>
+        <meta property="og:site_name" content="<?php echo $ogSiteName; ?>"/>
+
+        <!--Site title--->
+        <title><?php echo $title; ?></title>
+        <link rel="shortcut icon" type="image/x-icon" href="<?php echo URL::to(''); ?>/favicon.ico" />
+        <?php echo Theme::asset()->styles(); ?>
+
+        <?php echo Config::get('google-analytics-code', ''); ?>
+
+    </head>
+    <body>
+
+    <header id="header" class="navbar navbar-default  navbar-fixed-top" role="banner">
+
+          <div class="container">
+            <div class="navbar-header">
+
+              <a title="Go to home" href="<?php echo URL::to('/'); ?>" class="navbar-brand"><img src="<?php echo Theme::asset()->img('theme/images/logo.png'); ?>"/> </a>
+            </div>
+            <nav class="collapse navbar-collapse bs-navbar-collapse" role="navigation">
+              <ul class="nav navbar-nav search-box-container">
+
+
+
+                   <li>
+                       <?php if(!Config::get('remove-search-bar-from-home') or (Config::get('remove-search-bar-from-home') and Request::segment(1) != ''  and !in_array(Request::segment(1), ['forgot-password', 'contact', 'developers', 'about', 'disclaimer', 'terms']))): ?>
+                       <form id="search-box" class="search-box" action="<?php echo URL::route('search'); ?>">
+
+                           <input autocomplete="off" title="<?php echo trans('search.placeholder'); ?>"   type="text" name="term" value="<?php echo $searchRepository->term; ?>" placeholder="<?php echo trans('search.placeholder'); ?>"/>
+                           <button><i class="icon ion-search"></i> </button>
+
+                           <div class="dropdown header-dropdown-box">
+                                <div class="dropdown-content">
+
+                                </div>
+                                <a href="" class="footer-link">
+                                    <img class="indicator" src="<?php echo Theme::asset()->img('theme/images/loading.gif'); ?>"/>
+                                    <?php echo trans('search.see-all-results'); ?>
+                                </a>
+
+                                <a class="close-button" href=""><i class="icon ion-close"></i></a>
+                           </div>
+                       </form>
+                       <?php endif; ?>
+                   </li>
+              </ul>
+              <?php if(Auth::check()): ?>
+
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <?php if(Auth::check()): ?>
+                            <li class="dropdown" id="main-menu">
+                                <a  class="dropdown-toggle"  data-toggle="dropdown" href="">
+                                    <i class="icon ion-navicon"></i> <?php echo trans('global.explore'); ?>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <?php foreach(Menu::lists('site-menu') as $menu): ?>
+                                    <li><a href="<?php echo $menu->link; ?>" <?php echo ($menu->ajaxify)? 'data-ajaxify="true"' : null; ?>><?php echo $menu->icon; ?> <?php echo $menu->name; ?></a> </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </li>
+                            <?php endif; ?>
+                        <li class="header-nav">
+                            <a href="<?php echo URL::route('user-home'); ?>" data-ajaxify="true"><i class="icon ion-home"></i></a>
+                        </li>
+
+
+
+                        <li id="notification-link" class="notification-link">
+                            <?php $countNotification = $notificationRepository->count()?>
+                            <a href="" id="notification-dropdown-trigger" class="notification-dropdown-trigger"><i class="icon ion-ios7-bell-outline"></i>
+                                <?php echo ($countNotification) ? '<span>'.$countNotification.'</span>' : null; ?>
+                            </a>
+                            <div class="notification-dropdown header-dropdown-box">
+                                <div class="content">
+
+                                </div>
+                                <a href="<?php echo URL::route('notifications'); ?>" data-ajaxify="true" class="footer-link">
+                                    <img class="indicator" src="<?php echo Theme::asset()->img('theme/images/loading.gif'); ?>"/>
+                                    <?php echo trans('notification.see-all'); ?>
+                                </a>
+
+                                <a class="close-button" href=""><i class="icon ion-close"></i></a>
+                            </div>
+                        </li>
+                        <li class="notification-link">
+                            <?php $countRequest = $connectionRepository->countFriendRequest()?>
+                            <a class="friend-request-trigger" id='friend-request-trigger' href="<?php echo URL::route('friend-requests'); ?>"><i class="icon ion-person-stalker"></i> <?php echo (!empty($countRequest)) ?'<span>'.$countRequest. '</span>' : null; ?></a>
+
+                            <div class="request-dropdown header-dropdown-box">
+                                <div class="content">
+
+                                </div>
+                                <a href="<?php echo URL::route('friend-requests'); ?>" data-ajaxify="true" class="footer-link">
+                                    <img class="indicator" src="<?php echo Theme::asset()->img('theme/images/loading.gif'); ?>"/>
+                                    <?php echo trans('connection.see-all-request'); ?>
+                                </a>
+
+                                <a class="close-button" href=""><i class="icon ion-close"></i></a>
+                            </div>
+                        </li>
+                        <li id="message-dropdown-link" class="notification-link">
+                            <?php $countMessage = app('App\\Repositories\\MessageRepository')->countNew()?>
+                            <a href="" class="new-messages-trigger" id='new-messages-trigger'><i class="icon ion-ios7-chatboxes-outline"></i>
+                                <?php echo ($countMessage) ? '<span>'.$countMessage.'</span>' : null; ?>
+                            </a>
+
+                            <div class="message-dropdown header-dropdown-box">
+                                <div class="content">
+
+                                </div>
+                                <a href="<?php echo URL::route('messages'); ?>" data-ajaxify="true" class="footer-link">
+                                    <img class="indicator" src="<?php echo Theme::asset()->img('theme/images/loading.gif'); ?>"/>
+                                    <?php echo trans('message.see-all-messages'); ?>
+                                </a>
+
+                                <a class="close-button" href=""><i class="icon ion-close"></i></a>
+                            </div>
+                        </li>
+                        <li class="dropdown account-menu notification-link">
+                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href="">
+                                <img width="20" height="20" src="<?php echo Auth::user()->present()->getAvatar(30); ?>"/>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <?php foreach(Menu::lists('account-menu') as $menu): ?>
+                                    <li><a href="<?php echo $menu->link; ?>" <?php echo ($menu->ajaxify) ? "data-ajaxify='true'" : null; ?> ><?php echo $menu->name; ?></a> </li>
+                                <?php endforeach; ?>
+                                <li><a href="<?php echo $loggedInUser->present()->url(); ?>" data-ajaxify="true"><?php echo trans('user.my-profile'); ?></a></li>
+                                <li><a href="<?php echo URL::route('user-account'); ?>" data-ajaxify="true"><?php echo trans('user.account-settings'); ?></a> </li>
+
+                                <?php if(Auth::user()->isAdmin()): ?>
+
+                                    <li><a href="<?php echo URL::route('admincp'); ?>"><?php echo trans('admincp.admin-cp'); ?></a> </li>
+                                <?php endif; ?>
+
+                                <li class="divider"></li>
+                                <li><a href="<?php echo URL::route('helps'); ?>"><?php echo trans('help.help'); ?></a> </li>
+                                <li>
+                                    <a href="<?php echo URL::route('user-logout'); ?>"><?php echo trans('global.logout'); ?></a>
+                                </li>
+                            </ul>
+                        </li>
+                  </ul>
+              <?php else: ?>
+                    <ul id="change-language" class="navbar-nav nav navbar-right">
+                        <?php if(Request::segment(1)): ?>
+                            <li>
+                                <a href="<?php echo URL::to('/'); ?>"><?php echo trans('user.login-signup-here'); ?></a>
+                            </li>
+                        <?php endif; ?>
+                        <li class="dropdown">
+                            <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href=""><?php echo trans('global.change-language'); ?> <i class="caret"></i></a>
+                            <ul class="dropdown-menu">
+                                <?php foreach($languages as $language): ?>
+                                    <li><a href="<?php echo URL::route('change-language', ['lang' => $language->var]); ?>"><?php echo $language->name; ?></a> </li>
+                                <?php endforeach; ?>
+                            </ul>
+                        </li>
+                    </ul>
+
+              <?php endif; ?>
+            </nav>
+
+                <ul id="header-mobile-nav" class=" nav navbar-nav visible-xs navbar-right">
+                    <?php if(Auth::check()): ?>
+                        <li class="notification-link">
+                            <a class="notification-dropdown-trigger" href="<?php echo URL::route('notifications'); ?>">
+                                <i class="icon ion-ios7-bell-outline"></i>
+                                <?php echo ($countNotification) ? '<span>'.$countNotification.'</span>' : null; ?>
+                            </a>
+
+                        </li>
+                    <li class="notification-link">
+                        <?php $countRequest = $connectionRepository->countFriendRequest()?>
+                        <a class="friend-request-trigger" id='' href="<?php echo URL::route('friend-requests'); ?>" data-ajaxify="true"><i class="icon ion-person-stalker"></i> <?php echo (!empty($countRequest)) ?'<span>'.$countRequest. '</span>' : null; ?></a>
+                    </li>
+                        <li class="notification-link">
+                            <a class="new-messages-trigger" href="<?php echo URL::route('messages'); ?>" id=''><i class="icon ion-ios7-chatboxes-outline"></i>
+                                <?php echo ($countMessage) ? '<span>'.$countMessage.'</span>' : null; ?>
+                            </a>
+                        </li>
+                    <?php endif; ?>
+                    <li class="mobile-menu-toggle notification-link" id="mobile-">
+                      <a href="#sidebar" id="sidebar-trigger"   data-canvas="body">
+                        <i class="icon ion-navicon"></i>
+                      </a>
+                    </li>
+                </ul>
+          </div>
+        </header>
+
+    <?php echo Theme::section('layouts.side-nav'); ?>

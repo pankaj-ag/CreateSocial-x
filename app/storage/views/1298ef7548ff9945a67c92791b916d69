@@ -1,0 +1,57 @@
+<div class="container page-content clearfix">
+
+        <div class="left-column">
+
+            <div class="box">
+                <div class="box-title"><?php echo trans('invite.invite-friends'); ?></div>
+                <div class="box-content">
+                   <?php echo Theme::extend("invite-extend"); ?>
+                   <?php if($message): ?>
+                        <div class="alert alert-success"><?php echo $message; ?></div>
+                   <?php endif; ?>
+                   <div class="alert alert-info">
+                       <?php echo trans('invite.invite-note'); ?>
+                   </div>
+
+                   <form class="form-horizontal" method="post" action="">
+                       <div class="form-group">
+                           <label for="inputFullname" class="col-sm-3 control-label"><?php echo trans('global.from'); ?> :</label>
+                           <div class="col-sm-7">
+                               <input type="text" name="val[from]" value="<?php echo $user->email_address; ?>" class="form-control" id="inputFullname" disabled>
+
+                           </div>
+                       </div>
+                       <div class="form-group">
+                           <label for="inputFullname" class="col-sm-3 control-label"><?php echo trans('global.subject'); ?> : </label>
+                           <div class="col-sm-7">
+                               <?php echo $user->fullname; ?> invites you to <?php echo Config::get('site_title'); ?>
+
+                           </div>
+                       </div>
+                       <div class="form-group">
+                           <label for="inputFullname" class="col-sm-3 control-label"><?php echo trans('global.to'); ?>:</label>
+                           <div class="col-sm-7">
+                               <textarea name="val[to]" class="form-control" style="height: 200px"></textarea>
+                               <p class="help-block"><?php echo trans('invite.message-note'); ?></p>
+                           </div>
+                       </div>
+
+                       <div class="form-group">
+                           <div class="col-sm-offset-2 col-sm-10">
+                               <button type="submit" class="btn btn-sm btn-success"><?php echo trans('invite.send-invitation'); ?></button>
+
+                           </div>
+                       </div>
+                   </form>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="right-column">
+            <?php echo Theme::section('user.side-info'); ?>
+
+            <?php echo Theme::widget()->get('invite'); ?>
+
+        </div>
+    </div>

@@ -1,0 +1,14 @@
+<!--<div class=" user media <?php echo (isset($mini)) ? 'user-mini' : null; ?> <?php echo (isset($miniActions)) ? 'user-mini-actions' : null; ?>">
+      <!--<div class="media-object">
+           <a data-url="<?php echo $user->present()->popoverUrl(); ?>" class="user-popover" href="<?php echo $user->present()->url(); ?>" data-ajaxify="true"><img src="<?php echo $user->present()->getAvatar(100); ?>"/></a>
+      </div>-->
+     <!-- <div class="media-body">
+          <a  data-ajaxify="true" href="<?php echo $user->present()->url(); ?>">
+              <h5 class="media-heading"><?php echo $user->fullname; ?> <?php echo Theme::section('user.verified', ['user' => $user]); ?> <span><?php echo $user->present()->atName(); ?></span> </h5>
+          </a>
+      </div>
+</div>-->
+
+<span style="width: 10em;">
+<a data-url="<?php echo $user->present()->popoverUrl(); ?>" class="user-popover" href="<?php echo $user->present()->url(); ?>" data-ajaxify="true"><img src="<?php echo $user->present()->getAvatar(100); ?>" style="width: 8em; "/></a>
+</span>

@@ -1,0 +1,12 @@
+<?php $users = app('App\\Repositories\\UserRepository')->suggest(3)?>
+<?php if(count($users)): ?>
+    <div class="box">
+        <div class="box-title"><?php echo trans('user.people-you-know'); ?> <a data-ajaxify="true" class="pull-right " href="<?php echo URL::route('suggestion', ['type' => 'people']); ?>"><i class="icon ion-more"></i> <?php echo trans('global.more'); ?></a> </div>
+        <div class="box-content">
+
+            <?php foreach($users as $user): ?>
+                <?php echo Theme::section('user.display', ['user' => $user, 'mini' => true, 'miniActions' => true]); ?>
+            <?php endforeach; ?>
+        </div>
+    </div>
+<?php endif; ?>

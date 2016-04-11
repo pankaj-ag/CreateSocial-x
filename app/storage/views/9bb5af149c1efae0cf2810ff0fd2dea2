@@ -1,0 +1,93 @@
+<!DOCTYPE HTML>
+<html>
+    <head>
+        <meta name="keyword" content=""/>
+        <meta name="keyword" content=""/>
+        <meta name="viewport" content="width=device-width,initial-scale=1.0">
+        <title><?php echo $title; ?></title>
+        <?php echo Theme::asset()->styles(); ?>
+        <link rel="shortcut icon" type="image/x-icon" href="<?php echo URL::to(''); ?>/favicon.ico" />
+    </head>
+    <body>
+
+        <?php echo Theme::section('layouts.header'); ?>
+
+            <div id="content-container">
+                <div class="container">
+                    <div class="left-nav">
+                        <div class="title">Menu</div>
+                        <ul class="nav">
+                            <li class="<?php echo ($activePage == 'dashboard') ? 'active' : null; ?>">
+                                <a href="<?php echo URL::route('admincp'); ?>"><?php echo trans('admincp.dashboard'); ?></a>
+                            </li>
+                            <li class="dropdown <?php echo ($activePage == 'users') ? 'active' : null; ?>">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href=""><?php echo trans('admincp.users'); ?></a>
+                                <ul class="dropdown-menu">
+                                    <?php foreach(Menu::lists('admincp-users') as $menu): ?>
+
+                                        <li><a href="<?php echo $menu->link; ?>"><?php echo $menu->name; ?></a> </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </li>
+                            <li class="dropdown <?php echo ($activePage == 'configurations') ? 'active' : null; ?>">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href=""><?php echo trans('admincp.configurations'); ?></a>
+                                <ul class="dropdown-menu">
+                                    <?php foreach(Menu::lists('admincp-configuration') as $menu): ?>
+
+                                        <li><a href="<?php echo $menu->link; ?>"><?php echo $menu->name; ?></a> </li>
+                                    <?php endforeach; ?>
+
+                                    <li><a href="<?php echo URL::route('admincp-update-configuration'); ?>"><?php echo trans('admincp.update-configuration'); ?></a> </li>
+                                </ul>
+                            </li>
+                            <li class=" dropdown <?php echo ($activePage == 'theme') ? 'active' : null; ?>">
+                                <a data-toggle="dropdown" class="dropdown-toggle" href=""><?php echo trans('admincp.theme-management'); ?></a>
+                                <ul class="dropdown-menu">
+                                    <li><a href="<?php echo URL::route('admincp-theme'); ?>?type=frontend"><?php echo trans('admincp.frontend-themes'); ?></a> </li>
+                                    <li><a href="<?php echo URL::route('admincp-theme'); ?>?type=admincp"><?php echo trans('admincp.admincp-themes'); ?></a> </li>
+                                    <?php foreach(Menu::lists('admincp-themes') as $menu): ?>
+
+                                        <li><a href="<?php echo $menu->link; ?>"><?php echo $menu->name; ?></a> </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </li>
+                            <li class="<?php echo ($activePage == 'addon') ? 'active' : null; ?>">
+                                <a href="<?php echo URL::route('admincp-addon'); ?>"><?php echo trans('admincp.addon-management'); ?></a>
+                            </li>
+
+                            <?php foreach(Menu::lists('admincp-menu') as $menu): ?>
+                                <li class=" <?php echo ($activePage == $menu->id) ? 'active' : null; ?> <?php echo ($menu->hasMenus()) ? 'dropdown' : null; ?>">
+                                    <a class=" <?php echo ($menu->hasMenus()) ? 'dropdown' : null; ?>" <?php echo ($menu->hasMenus()) ? 'data-toggle="dropdown"':null; ?> href="<?php echo $menu->link; ?>"><?php echo $menu->name; ?></a>
+
+                                    <?php if($menu->hasMenus()): ?>
+                                        <ul class="dropdown-menu">
+                                            <?php foreach($menu->listMenus() as $subMenu): ?>
+                                                <li>
+                                                    <a href="<?php echo $subMenu->link; ?>"><?php echo $subMenu->name; ?></a>
+                                                </li>
+                                            <?php endforeach; ?>
+                                        </ul>
+                                    <?php endif; ?>
+                                </li>
+                            <?php endforeach; ?>
+
+                            <li>
+                                <a href="<?php echo URL::route('admincp-database-update'); ?>"><?php echo trans('admincp.update-database'); ?></a>
+                            </li>
+
+                        </ul>
+                    </div>
+
+                    <div class="right-content">
+                        <?php echo $content; ?>
+                    </div>
+                </div>
+            </div>
+        <?php echo Theme::section('layouts.footer'); ?>
+
+
+    </body>
+    <?php echo Theme::asset()->scripts(); ?>
+</html>
+
+

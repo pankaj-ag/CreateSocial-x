@@ -1,0 +1,7 @@
+<?php if ($post->type == 'user-timeline'): ?>
+    <?php echo Theme::section('post.headers.user', ['post' => $post]); ?>
+<?php elseif ($post->type == "community"): ?>
+    <?php echo Theme::section('post.headers.community', ['post' => $post]); ?>
+<?php elseif($post->type == 'page'): ?>
+    <?php echo Theme::section('post.headers.page', ['post' => $post]); ?>
+<?php endif; ?>

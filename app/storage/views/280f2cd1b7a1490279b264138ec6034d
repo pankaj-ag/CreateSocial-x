@@ -1,0 +1,9 @@
+<?php if(count($messages)): ?>
+    <div class="message-conversation-list">
+        <?php foreach($messages as $message): ?>
+        <?php echo Theme::section('messages.display-dropdown', ['message' => $message]); ?>
+        <?php endforeach; ?>
+    </div>
+<?php else: ?>
+    <?php echo trans('message.no-new-message'); ?>
+<?php endif; ?>

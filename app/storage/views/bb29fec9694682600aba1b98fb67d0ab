@@ -1,0 +1,9 @@
+<?php if(Auth::check()): ?>
+    <?php if($profileUser->isOwner()): ?>
+        <?php echo Theme::section('post.editor.main'); ?>
+    <?php elseif($profileUser->present()->canPost()): ?>
+        <?php echo Theme::section('post.editor.main', ['to' => $profileUser->id, 'privacy' => 1]); ?>
+    <?php endif; ?>
+<?php endif; ?>
+<?php Theme::widget()->add('profile.timeline-widget', ['user-profile-timeline'], ['userId' => $profileUser->id])?>
+<?php echo Theme::widget()->get('user-profile-timeline'); ?>

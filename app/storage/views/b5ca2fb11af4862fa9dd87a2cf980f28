@@ -1,0 +1,28 @@
+<div  class="container page-content clearfix">
+    <div id="account-container" class="left-column">
+        <?php echo $content; ?>
+    </div>
+    <div class="right-column">
+        <?php echo Theme::section('user.side-info'); ?>
+        <div class="box nav-box">
+                <div class="box-title"><?php echo trans('user.account-menu'); ?></div>
+                <ul class="nav">
+                    <li><a data-ajaxify="true" href="<?php echo URL::route('user-account'); ?>"><?php echo trans('user.account'); ?></a> </li>
+                    <li><a data-ajaxify="true" href="<?php echo URL::route('user-account-privacy'); ?>"><?php echo trans('user.security-privacy'); ?></a> </li>
+                    <li><a href="<?php echo URL::route('notification-privacy'); ?>" data-ajaxify="true"><?php echo trans('notification.notifications'); ?></a> </li>
+                    <li><a data-ajaxify="true" href="<?php echo URL::route('block-users'); ?>"><?php echo trans('user.block-members'); ?></a> </li>
+                    <li><a data-ajaxify="true" href="<?php echo URL::route('edit-profile'); ?>"><?php echo trans('user.edit-profile'); ?></a> </li>
+
+                    <?php if(Config::get('page-design')): ?>
+                        <li><a data-ajaxify="true" href="<?php echo URL::route('user-design'); ?>"><?php echo trans('user.design-your-page'); ?></a> </li>
+                    <?php endif; ?>
+
+                    <?php foreach(Menu::lists('account-settings') as $menu): ?>
+                        <li><a href="<?php echo $menu->link; ?>" <?php echo ($menu->ajaxify) ? "data-ajaxify='true'" : null; ?> ><?php echo $menu->name; ?></a> </li>
+                    <?php endforeach; ?>
+
+                    <li><a data-ajaxify="true" href="<?php echo URL::route('user-deactivate'); ?>"><?php echo trans('user.deactivate-account'); ?></a> </li>
+                </ul>
+        </div>
+    </div>
+</div>

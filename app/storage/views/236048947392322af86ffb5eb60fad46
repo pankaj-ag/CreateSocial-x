@@ -1,0 +1,31 @@
+<div style="margin-top: 20px" class="box">
+
+    <div class="box-content">
+        <ul class="nav nav-tabs">
+          <li class="<?php echo ($type == 'friends') ? 'active' : null; ?>"><a data-ajaxify="true" href="<?php echo $profileUser->present()->url('connection/friends'); ?>"><?php echo trans('connection.friends'); ?></a></li>
+          <li class="<?php echo ($type == 'followers') ? 'active' : null; ?>"><a data-ajaxify="true" href="<?php echo $profileUser->present()->url('connection/followers'); ?>"><?php echo trans('connection.followers'); ?></a></li>
+          <li class="<?php echo ($type == 'following') ? 'active' : null; ?>"><a data-ajaxify="true" href="<?php echo $profileUser->present()->url('connection/following'); ?>"><?php echo trans('connection.following'); ?></a></li>
+        </ul>
+
+        <?php foreach($connections as $connection): ?>
+            <?php if ($type == 'friends'): ?>
+                <?php $user = $connection->present()->getfriend($profileUser->id)?>
+                <?php if($user): ?>
+                    <?php echo Theme::section('user.display', ['user' => $user]); ?>
+                <?php endif; ?>
+            <?php elseif($type == 'followers'): ?>
+
+                <?php if($connection->fromUser): ?>
+                    <?php echo Theme::section('user.display', ['user' => $connection->fromUser]); ?>
+                <?php endif; ?>
+            <?php elseif($type == 'following'): ?>
+                <?php if($connection->toUser): ?>
+                    <?php echo Theme::section('user.display', ['user' => $connection->toUser]); ?>
+                <?php endif; ?>
+            <?php endif; ?>
+        <?php endforeach; ?>
+
+        <?php echo $connections->links(); ?>
+
+    </div>
+</div>

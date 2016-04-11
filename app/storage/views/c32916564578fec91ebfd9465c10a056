@@ -1,0 +1,25 @@
+<div id="preview-card" class="user-popover">
+    <div class="cover">
+        <img class="" src="<?php echo (!empty($user->cover)) ? $user->present()->coverImage() : Theme::asset()->img('theme/images/profile-cover.jpg'); ?>"/>
+    </div>
+
+
+    <div  class="media">
+                    <div class="media-object pull-left">
+                       <a data-ajaxify="true" href="<?php echo $user->present()->url(); ?>"> <img src="<?php echo $user->present()->getAvatar(150); ?>"/></a>
+                    </div>
+                    <div class="media-body">
+
+                        <a data-ajaxify="true" href="<?php echo $user->present()->url(); ?>"><h4 class="media-heading"><?php echo $user->fullname; ?></h4></a>
+                        <span>@ <?php echo $user->username; ?></span> <?php echo Theme::section('user.verified', ['user' => $user]); ?>
+                    </div>
+                </div>
+
+
+</div>
+<div class="user-bio"><?php echo $user->bio; ?></div>
+<?php if(Auth::check()): ?>
+<div class="popover-action-buttons">
+    <?php echo Theme::section('connection.buttons', ['user' => $user]); ?>
+</div>
+<?php endif; ?>

@@ -1,0 +1,59 @@
+<div class="post-header clearfix">
+            <div class="header-object">
+                <a class="user-popover" data-url="<?php echo $post->user->present()->popoverUrl(); ?>" href="<?php echo $post->user->present()->url(); ?>"><img src="<?php echo $post->user->present()->getAvatar(100); ?>"/></a>
+            </div>
+            <div class="header-body">
+                <h3 class="title">
+
+                    <a  data-ajaxify="true" href="<?php echo $post->user->present()->url(); ?>"><?php echo $post->user->fullname; ?></a> <span><?php echo $post->user->present()->atName(); ?> <?php echo ($post->shared) ? 'shared a post' : null; ?></span>
+                    <?php echo Theme::section('user.verified', ['user' => $post->user]); ?>
+                    <?php if(!empty($post->to_user_id) and $post->toUser): ?>
+                        <i class="icon ion-ios7-arrow-thin-right"></i> <a data-ajaxify="true" href="<?php echo $post->toUser->present()->url(); ?>"><?php echo $post->toUser->fullname; ?></a>
+                    <?php endif; ?>
+
+                    <?php if($post->present()->isAutoPost()): ?>
+                        <?php echo Theme::section('post.auto-post.header', ['post' => $post]); ?>
+                    <?php endif; ?>
+                </h3>
+                <span class="post-time"><i class="icon ion-ios7-time-outline"></i>
+
+                    <span title="<?php echo $post->present()->time(); ?>"><?php echo formatDTime($post->created_at); ?></span> <span style="font-weight: bold"><i class="icon ion-ios7-arrow-thin-right"></i>
+                        <span class="post-is-edited-<?php echo $post->id; ?>">
+                            <?php if($post->edited): ?>
+                            <?php echo trans('post.edited'); ?>
+                            <?php endif; ?>
+                        </span>
+                        <?php echo $post->present()->getPrivacy(); ?></span></span>
+
+                <?php echo Theme::extend('post-header', ['post' => $post]); ?>
+
+                <div class="post-action-dropdown dropdown">
+                    <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href=""><i class="icon ion-ios7-arrow-down"></i></a>
+
+                   <?php if (Auth::check()): ?>
+
+                         <ul class="dropdown-menu pull-right">
+                             <?php if (Auth::user()->id != $post->user->id): ?>
+                                <li><a data-id="<?php echo $post->id; ?>" href="" class="hide-post"><?php echo trans('post.dont-want-see'); ?></a> </li>
+                             <?php endif; ?>
+                            <?php if (Auth::user()->id != $post->user->id): ?>
+                                <li><a data-location="post" data-userid="<?php echo $post->user->id; ?>" class="block-user" href=""><?php echo trans('user.block-user'); ?></a> </li>
+                            <?php endif; ?>
+
+                            <li><a href="<?php echo URL::route('report', ['type' => 'post']); ?>?url=<?php echo $post->present()->url(); ?>"><?php echo trans('post.report-post'); ?></a> </li>
+
+                             <li><a href="<?php echo route('post-page', ['id' => $post->id]); ?>"><?php echo trans('post.view-post'); ?></a> </li>
+                            <?php if (!$post->shared and $post->present()->canDelete()): ?>
+                                <li><a href="" data-id="<?php echo $post->id; ?>" class="edit-post-trigger"><?php echo trans('post.edit'); ?></a> </li>
+                                <li><a data-id="<?php echo $post->id; ?>" class="delete-post" data-message="Do you really want to delete this post" href=""><?php echo trans('post.remove'); ?></a> </li>
+                            <?php endif; ?>
+
+                             <?php echo Theme::extend('post-header-links', ['post' => $post]); ?>
+
+                             <?php echo Theme::section('post.social-share', ['post' => $post]); ?>
+                         </ul>
+                   <?php endif; ?>
+                </div>
+            </div>
+
+    </div>

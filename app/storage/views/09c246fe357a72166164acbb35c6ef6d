@@ -1,0 +1,22 @@
+<?php $posts = app('App\\Repositories\\PostRepository')->lists('profile', 0, $userId)?>
+
+<div data-type="profile" data-lastcheck="" data-offset="<?php echo \Config::get('post-per-page'); ?>" data-userid="<?php echo $userId; ?>" id="post-list">
+
+    <?php foreach($posts as $post): ?>
+        <?php if(Cache::has('post-'.$post->id)): ?>
+        <?php echo Cache::get('post-'.$post->id); ?>
+        <?php else: ?>
+        <?php
+        $postContent = (String) Theme::section('post.media', ['post' => $post]);
+        if (Config::get('enable-query-cache', 0)) Cache::add('post-'.$post->id, $postContent, Config::get('post-cache-time-out', 3));
+        ?>
+        <?php echo $postContent; ?>
+        <?php endif; ?>
+    <?php endforeach; ?>
+</div>
+
+
+<?php if(count($posts)): ?>
+<a class="post-load-more" href=""><?php echo trans('post.load-more'); ?></a>
+<?php endif; ?>
+

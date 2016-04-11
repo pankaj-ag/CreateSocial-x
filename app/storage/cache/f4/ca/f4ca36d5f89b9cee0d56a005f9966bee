@@ -1,0 +1,213 @@
+1451409644s:18341:"<div id="post-1" user-timeline auto-post 0 0  class="post-media user-post-13 clearfix">
+    <div class="post-header clearfix">
+            <div class="header-object">
+                <a class="user-popover" data-url="http://localhost/crea8social2/user/popover/13" href="http://localhost/crea8social2/neha123"><img src="http://localhost/crea8social2/uploads/users/13/_200_2c04b88df8bc865b6cb5ed843b84a27d.jpg"/></a>
+            </div>
+            <div class="header-body">
+                <h3 class="title">
+
+                    <a  data-ajaxify="true" href="http://localhost/crea8social2/neha123">neha</a> <span>@neha123 </span>
+                                        
+                                            <i class="icon ion-ios7-arrow-thin-right"></i>
+    change profile photo                                    </h3>
+                <span class="post-time"><i class="icon ion-ios7-time-outline"></i>
+
+                    <span title="2015-09-15T09:00:09Z">Tuesday, September 15, 2015</span> <span style="font-weight: bold"><i class="icon ion-ios7-arrow-thin-right"></i>
+                        <span class="post-is-edited-1">
+                                                    </span>
+                        Public</span></span>
+
+                
+                <div class="post-action-dropdown dropdown">
+                    <a data-toggle="dropdown" data-hover="dropdown" class="dropdown-toggle" href=""><i class="icon ion-ios7-arrow-down"></i></a>
+
+                   
+                         <ul class="dropdown-menu pull-right">
+                                                             <li><a data-id="1" href="" class="hide-post">I don't want to see this</a> </li>
+                                                                                         <li><a data-location="post" data-userid="13" class="block-user" href="">Block user</a> </li>
+                            
+                            <li><a href="http://localhost/crea8social2/report/post?url=http://localhost/crea8social2/post/1">Report post</a> </li>
+
+                             <li><a href="http://localhost/crea8social2/post/1">View post</a> </li>
+                            
+                             
+                             <li class="divider"></li>
+<li><a href="javascript:void(0)" onclick="return window.open(
+                             'http://www.facebook.com/sharer.php?u=http://localhost/crea8social2/post/1'
+                             , 'targetWindow', 'width=600,height=400')"
+        ><i style="display: inline-block;width: 15%;text-align: center" class="icon ion-social-facebook"></i> Share on Facebook</a> </li>
+
+<li><a href="javascript:void(0)" onclick="return window.open(
+                             'http://twitter.com/share?url=http://localhost/crea8social2/post/1'
+                             , 'targetWindow', 'toolbar=no,location=no,status=no,scrollbar=yes,resizable=no,width=600,height=400')"
+        ><i style="display: inline-block;width: 15%;text-align: center" class="icon ion-social-twitter"></i> Share on Twitter</a> </li>
+
+<li><a href="javascript:void(0)" onclick="return window.open(
+                             'https://plus.google.com/share?url=http://localhost/crea8social2/post/1'
+                             , 'targetWindow', 'toolbar=no,location=no,status=no,scrollbar=yes,resizable=no,width=600,height=400')"
+        ><i style="display: inline-block;width: 15%;text-align: center" class="icon ion-social-googleplus"></i> Share on G+</a> </li>
+
+
+<li><a href="javascript:void(0)" onclick="return window.open(
+                             'http://www.linkedin.com/shareArticle?mini=true&url=http://localhost/crea8social2/post/1'
+                             , 'targetWindow', 'toolbar=no,location=no,status=no,scrollbar=yes,resizable=no,width=600,height=400')"
+        ><i style="display: inline-block;width: 15%;text-align: center" class="icon ion-social-linkedin-outline"></i> Share on LinkedIn</a> </li>
+
+                         </ul>
+                                   </div>
+            </div>
+
+    </div>    <!--original owner of post incase of shared-->
+    
+    <div class="post-body">
+
+
+        <div id="post-text-content-1" class="post-text-content">
+            <h1>helooo</h1>
+
+                                    
+            
+        </div>
+
+
+        
+                <div class=" one-image" >
+
+        <a class="preview-image post-thumb-one-image" rel="1-images" href="http://localhost/crea8social2/uploads/users/13/_600_61600172be64cd2fcf908240c5ea9ec8.jpg"><img src="http://localhost/crea8social2/uploads/users/13/_600_61600172be64cd2fcf908240c5ea9ec8.jpg"/></a>
+
+    </div>
+          
+
+        
+        
+
+        
+                
+                
+    </div>
+
+    <div class="post-footer">
+        <ul class="nav nav-left">
+                        <li>
+                
+                <a data-is-login="1" data-status="0" class="like-button" data-like="Like" data-unlike="Unlike" data-id="1" data-type="post" href=""><i class="icon ion-ios7-heart"></i> <span>Like</span></a>
+            </li>
+                        <li>
+                
+                <a data-userid="2" data-on="Turn On Notifications" data-status="0" data-off="Turn Off Notifications" class="toggle-notification-receiver" data-type="post" data-type-id="1" href="">
+                    <i class="icon ion-ios7-bell-outline"></i>
+
+                        <span>
+                                                            Turn On Notifications                                                    </span>
+                </a>
+            </li>
+             <li>
+             
+            
+                <a data-userid="2" data-on="add to favorite" data-status="0" data-off="add to favorite" class="toggle-notification-receiver favorite" data-type="post" data-type-id="1" href="">
+                    <i class="icon ion-ios7-bell-outline"></i>
+
+                        <span>
+                                                            add to favorite                                                    </span>
+                </a>
+            </li>
+                    </ul>
+
+        <ul class="nav nav-right pull-right">
+                        <li><a data-id="1" data-loading="loading....." class="post-activity-loader" href="http://localhost/crea8social2/likes/post/1"><i class="icon ion-ios7-heart"></i> <span class="post-like-count-1">0</span></a> </li>
+            <li><a  href="javascript:void(0)"><i class="icon ion-reply-all"></i> <span class="post-reply-count-1">0</span></a> </li>
+        </ul>
+
+
+    </div>
+    <div id="post-activity-1" class="post-activity">
+        loading.....    </div>
+    <div class="post-replies" id="1-post-replies" data-limit="3" data-offset="3" data-type="post" data-type-id="1">
+
+                <div id="post-1-reply-lists" class="replies-list">
+
+                    </div>
+                            <div class="media clearfix" style="overflow: visible">
+    
+    <div class="media-body" style="overflow: visible;content:'';
+
+ display:block;">
+        <form  id="reply-form-post-1" data-type="post" class="clearfix" data-id="1" enctype="multipart/form-data" action="" method="post">
+            <input data-type="post" data-id="1" id="1-reply-input" autocomplete="off" data-target="#1-hashtag-mention-suggestion" data-text-limit="150" data-counter-target="#1-text-counter" class="mention post-text-limit" type="text" placeholder="Add a comment"/>
+            <input type="hidden" name="val[type]" value="post"/>
+            <input type="hidden" name="val[type_id]" value="1"/>
+            <div class="actions">
+
+            </div>
+
+            <div class="real-comment-form">
+                <textarea data-height="30" style="height: 50px" id="1-reply-textarea" data-target="#1-hashtag-mention-suggestion" data-text-limit="150" data-counter-target="#1-text-counter" class="mention post-text-limit"  name="val[text]" placeholder="Add a comment" ></textarea>
+                <div class="hashtag-mention-suggestion" id="1-hashtag-mention-suggestion" style="position: relative">
+                    <div class="listing"></div>
+                </div>
+                <div class="reply-footer">
+                    <button class="btn btn-success btn-sm">Reply</button>
+                    <a data-type="post" data-id="1" href="" class="btn btn-danger btn-sm cancel-reply-form">Cancel</a>
+
+
+                    
+                    <a class="emoticon-selector" href="javascript:void(0)">
+                        <img style="display: inline-block;width: 15px;margin: 3px auto" src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticon.png"/>
+                    </a>
+                    <div class="" style="display: none">
+
+                                                <a title="Smile" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=":)" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/big_smile.png"/> </a>
+                                                <a title="Bad Smile" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=":<)" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/bad_smile.png"/> </a>
+                                                <a title="Amazing" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code="-:" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/amazing.png"/> </a>
+                                                <a title="Anger" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=":@" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/anger.png"/> </a>
+                                                <a title="Bad Egg" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=":b" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/bad_egg.png"/> </a>
+                                                <a title="Beaten" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=")b" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/beaten.png"/> </a>
+                                                <a title="Black Heart" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code="(b" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/black_heart.png"/> </a>
+                                                <a title="Cry" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=":c" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/cry.png"/> </a>
+                                                <a title="Happy" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=":-)" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/happy.png"/> </a>
+                                                <a title="Electric Shock" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=";-e" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/electric_shock.png"/> </a>
+                                                <a title="Girl" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=";-g" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/girl.png"/> </a>
+                                                <a title="Exciting" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=";-ce" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/exciting.png"/> </a>
+                                                <a title="Eyes droped" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=";-ye" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/eyes_droped.png"/> </a>
+                                                <a title="Greedy" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=";-(g" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/greedy.png"/> </a>
+                                                <a title="Haha" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=";-ha" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/haha.png"/> </a>
+                                                <a title="Horror" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=";-ho" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/horror.png"/> </a>
+                                                <a title="Money" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=";-)m" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/money.png"/> </a>
+                                                <a title="Nothing" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=";-)-n" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/nothing.png"/> </a>
+                                                <a title="Nothing to say" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=";-)-sn" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/nothing_to_say.png"/> </a>
+                                                <a title="Red heart" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=";-rh" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/red_heart.png"/> </a>
+                                                <a title="Scorn" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=";-sc" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/scorn.png"/> </a>
+                                                <a title="Shame" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=";-sh" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/shame.png"/> </a>
+                                                <a title="Shocked" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=";-s-h" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/shocked.png"/> </a>
+                                                <a title="Super Man" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=";-sp" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/super_man.png"/> </a>
+                                                <a title="Iron Man" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=";-im" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/the_iron_man.png"/> </a>
+                                                <a title="Tongue" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=":P" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/grimace.png"/> </a>
+                                                <a title="Unhappy" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=":(" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/unhappy.png"/> </a>
+                                                <a title="Victory" data-target="#1-reply-textarea" style="display: inline-block;margin: 5px" href="" data-code=":-v" class="each-emoticon-selector"><img src="http://localhost/crea8social2/themes/frontend/default/assets/images/emoticons/victory.png"/> </a>
+                                            </div>
+
+                                            <span  class=" fileupload fileupload-exists" data-provides="fileupload">
+
+                                  <a  class="btn-file btn">
+                                      <span class="fileupload-new"><i class="icon ion-android-camera"></i></span>
+                                      <span class="fileupload-exists"><i class="icon ion-android-camera"></i></span>
+                                      <input title="" class="" type="file" name="image">
+                                  </a>
+                        </span>
+
+                                        <span style="margin:0" id="1-text-counter" class="post-text-counter">150</span>
+                                    </div>
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+                
+    </div>
+</div>
+<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.0/jquery.min.js"></script>
+
+<script src="http://localhost/crea8social2/app/storage/assets/favorite.js"></script>
+";

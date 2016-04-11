@@ -1,0 +1,18 @@
+<div class="container page-content">
+    <div class="left-column">
+        <?php echo $content; ?>
+    </div>
+ <h1>pankaj</h1>
+    <div class="right-column">
+        <?php echo Theme::section('user.side-info'); ?>
+        <div class="box nav-box">
+                        <div class="box-title"><?php echo trans('user.suggestions'); ?></div>
+                        <ul class="nav">
+                            <li><a data-ajaxify="true" href="<?php echo URL::route('suggestion', ['type' => 'people']); ?>"><?php echo trans('user.people-you-know'); ?></a> </li>
+
+                        </ul>
+                </div>
+        <?php echo Theme::widget()->get('user-suggestion'); ?>
+       
+    </div>
+</div>

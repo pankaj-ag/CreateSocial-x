@@ -1,0 +1,85 @@
+<div style="padding-bottom: 10px" class="box">
+    <div class="box-title"><?php echo $profileUser->present()->fullName(); ?>
+    <?php echo trans('global.information'); ?>
+    <?php if($profileUser->isOwner()): ?>
+        <a href="<?php echo URL::route('edit-profile'); ?>" data-ajaxify="true"><i class="icon ion-edit"></i> Edit Profile</a>
+    <?php endif; ?>
+     </div>
+
+
+        <table class="profile-side-detail table table-striped">
+
+            <thead>
+                <th style="width: 30%"></th>
+                <th style="width: 70%"></th>
+            </thead>
+            <tbody>
+
+                <tr>
+                    <td><strong><?php echo trans('user.date-joined'); ?> </strong></td>
+                    <td><span class="post-time" ><span title="<?php echo $profileUser->present()->joinedOn(); ?>"><?php echo $profileUser->created_at; ?></span></span> </td>
+                </tr>
+
+                <tr>
+                    <td><strong><?php echo trans('user.last-login'); ?> :</strong></td>
+                    <td><span class="post-time" ><span title="<?php echo $profileUser->present()->lastLoginOn(); ?>"><?php echo $profileUser->updated_at; ?></span></span> </td>
+                </tr>
+
+                <?php if(Config::get('user-enable-birth-date', 1)): ?>
+                    <?php if($profileUser->birth_day): ?>
+                        <tr>
+                            <td><strong><?php echo trans('month.born-on'); ?>: </strong></td>
+                            <td>
+                                <?php echo getMonthName($profileUser->birth_month); ?>, <?php echo $profileUser->birth_day; ?>
+
+                                <?php if($profileUser->present()->canSeeBirth()): ?>
+                                    ,<?php echo $profileUser->birth_year; ?> (<?php echo getProperAge($profileUser->birth_year, $profileUser->birth_day, $profileUser->birth_month); ?> <?php echo trans('month.years-old'); ?>)
+                                <?php endif; ?>
+                            </td>
+                        </tr>
+                    <?php endif; ?>
+                <?php endif; ?>
+               <?php if($profileUser->country): ?>
+                    <tr>
+                        <td><strong><?php echo trans('global.country'); ?></strong></td>
+                        <td><?php echo ucwords($profileUser->country); ?></td>
+                    </tr>
+               <?php endif; ?>
+
+               <?php if($profileUser->city): ?>
+                <tr>
+                    <td><strong><?php echo trans('global.city'); ?></strong></td>
+                    <td><?php echo ucwords($profileUser->city); ?></td>
+                </tr>
+               <?php endif; ?>
+
+                <?php if($profileUser->genre): ?>
+                <tr>
+                    <td><strong><?php echo trans('global.genre'); ?></strong></td>
+                    <td><?php echo trans('global.'.$profileUser->genre); ?></td>
+                </tr>
+                <?php endif; ?>
+                <?php if($profileUser->bio): ?>
+                    <tr>
+                        <td><strong><?php echo trans('user.bio'); ?></strong></td>
+                        <td><?php echo $profileUser->bio; ?></td>
+                    </tr>
+                <?php endif; ?>
+
+                <?php foreach($profileUser->present()->fields() as $field): ?>
+                    <?php $value = $profileUser->present()->profile($field->id)?>
+                    <?php if(!empty($value)): ?>
+                        <tr>
+                            <td><strong><?php echo $field->name; ?></strong></td>
+                            <td><?php echo $profileUser->present()->profile($field->id); ?></td>
+                        </tr>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+
+            </tbody>
+
+        </table>
+
+
+
+</div>

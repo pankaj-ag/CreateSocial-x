@@ -1,0 +1,35 @@
+<div class="form-group">
+    <label for="exampleInputPassword1"><?php echo trans('month.birthdate'); ?></label><br/>
+    <select style="width: 30%" name="val[birth_day]">
+        <option value=""><?php echo trans('month.day'); ?></option>
+        <?php for($i = 1;$i <= 31;$i++): ?>
+            <option <?php echo (isset($day) and $day == $i) ? 'selected' :  null; ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
+        <?php endfor; ?>
+    </select>
+
+    <select style="width: 38%" name="val[birth_month]">
+        <option value=""><?php echo trans('month.month'); ?></option>
+        <?php foreach(Config::get('months.list') as $monthId => $name): ?>
+            <option <?php echo (isset($month) and $month == $monthId) ? 'selected' :  null; ?> value="<?php echo $monthId; ?>"><?php echo trans($name); ?></option>
+        <?php endforeach; ?>
+    </select>
+
+    <select  style="width: 30%" name="val[birth_year]">
+        <option value=""><?php echo trans('month.year'); ?></option>
+        <?php
+
+        $start = Config::get('birth-year-max', '');
+        $start = (empty($start)) ? date('Y') : $start;
+        $end = Config::get('birth-year-max', '');
+        $end = (empty($end)) ? 1940 : $end;
+
+        ?>
+        <?php for($i = $start; $i>=1940;$i--): ?>
+
+
+            <option <?php echo (isset($year) and $year == $i) ? 'selected' :  null; ?> value="<?php echo $i; ?>"><?php echo $i; ?></option>
+
+        <?php endfor; ?>
+    </select>
+
+</div>

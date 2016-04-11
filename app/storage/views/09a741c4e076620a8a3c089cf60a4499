@@ -1,0 +1,120 @@
+<div class="user user-mini media ">
+    <?php
+
+        $avatar = $photo->user->present()->getAvatar(100);
+        $ownerLink = $photo->user->present()->url();
+        $canDelete = $photo->isOWner();
+        $name = $photo->user->fullname;
+
+        if ($photo->page_id) {
+            $page = $photo->page;
+            if ($page) {
+                $avatar = $page->present()->getAvatar(100);
+                $ownerLink = $page->present()->url();
+                if ($page->present()->isAdmin() or $page->present()->isEditor()) $canDelete = true;
+                $name = $page->title;
+            }
+        }
+
+    ?>
+      <div class="media-object pull-left">
+           <a href="<?php echo $ownerLink; ?>" data-ajaxify="true"><img src="<?php echo $avatar; ?>"/></a>
+      </div>
+      <div class="media-body">
+          <h5 class="media-heading"><?php echo $name; ?></h5>
+          <?php if(Auth::check() and $canDelete): ?>
+
+                <a class="delete-photo" href="<?php echo URL::route('delete-photo', ['id' => $photo->id]); ?>"><?php echo trans('global.delete'); ?></a>
+
+          <?php endif; ?>
+      </div>
+
+</div>
+
+<div class="clearfix">
+    <ul class="pull-left nav">
+        <?php if($photo->post_id and $photo->post): ?>
+        <?php $hasLike = $photo->post->hasLiked()?>
+
+        <a data-is-login="<?php echo Auth::check(); ?>" data-status="<?php echo ($hasLike) ? '1' : 0; ?>" class="like-button" data-like="<?php echo trans('like.like'); ?>" data-unlike="<?php echo trans('like.unlike'); ?>" data-id="<?php echo $photo->post->id; ?>" data-type="post" href=""><i class="icon ion-ios7-heart"></i> <span><?php echo ($hasLike) ? trans('like.unlike') : trans('like.like'); ?></span></a>
+        <?php else: ?>
+        <?php $hasLike = $photo->hasLiked()?>
+
+        <a data-is-login="<?php echo Auth::check(); ?>" data-status="<?php echo ($hasLike) ? '1' : 0; ?>" class="like-button" data-like="<?php echo trans('like.like'); ?>" data-unlike="<?php echo trans('like.unlike'); ?>" data-id="<?php echo $photo->id; ?>" data-type="photo" href=""><i class="icon ion-ios7-heart"></i> <span><?php echo ($hasLike) ? trans('like.unlike') : trans('like.like'); ?></span></a>
+        <?php endif; ?>
+    </ul>
+    <ul class="pull-right nav">
+        <?php if($photo->post_id and $photo->post): ?>
+        <li><i class="icon ion-thumbsup"></i><span class="photo-post-like-count-<?php echo $photo->post->id; ?> post-like-count-<?php echo $photo->id; ?>"><?php echo $photo->post->countLikes(); ?></span>  <?php echo trans('like.likes'); ?></li>
+        <li><i class="icon ion-chatbox"></i> <span class="photo-post-reply-count-<?php echo $photo->post->id; ?> post-reply-count-<?php echo $photo->id; ?>"><?php echo $photo->post->countComments(); ?></span> <?php echo trans('comment.comments'); ?></li>
+        <?php else: ?>
+
+        <li><i class="icon ion-thumbsup"></i><span class="post-like-count-<?php echo $photo->id; ?>"><?php echo $photo->countLikes(); ?></span>  <?php echo trans('like.likes'); ?></li>
+        <li><i class="icon ion-chatbox"></i> <span class="post-reply-count-<?php echo $photo->id; ?>"><?php echo $photo->countComments(); ?></span> <?php echo trans('comment.comments'); ?></li>
+
+        <?php endif; ?>
+     </ul>
+</div>
+
+<?php if($photo->post_id and $photo->post): ?>
+<div class="post-replies" id="photo-post-replies" data-limit="5" data-offset="5" data-type="post" data-type-id="<?php echo $photo->post->id; ?>">
+<?php else: ?>
+<div class="post-replies" id="photo-post-replies" data-limit="5" data-offset="5" data-type="photo" data-type-id="<?php echo $photo->id; ?>">
+<?php endif; ?>
+            <?php if(Auth::check()): ?>
+                <?php
+                    $param = [
+                        'typeId' => $photo->id,
+                        'type' => 'photo'
+                    ];
+
+                    if($photo->post_id and $photo->post) {
+                        $param['typeId'] = $photo->post->id;
+                        $param['type'] = 'post';
+                        $param['uniqueId'] = 'photo-'.$photo->id;
+                    }
+                ?>
+                <?php if($photo->page_id and $photo->page): ?>
+                    <?php if($photo->page->present()->isAdmin() or $photo->page->present()->isEditor()): ?>
+
+                        <?php $param['avatar'] = $photo->page->present()->getAvatar(30)?>
+                    <?php endif; ?>
+
+                <?php endif; ?>
+
+                <?php echo Theme::section('comment.form', $param); ?>
+            <?php endif; ?>
+
+            <?php if($photo->post_id and $photo->post): ?>
+                <?php if($photo->post->countComments() > 5): ?>
+                <a href="" class="load-more-comment" data-target="#photo-post-replies"><i class="icon ion-more"></i> View more comments <img class="indicator" src="<?php echo Theme::asset()->img('theme/images/loading.gif'); ?>"/></a>
+                <?php endif; ?>
+                <div id="photo-<?php echo $photo->id; ?>-reply-lists" class="replies-list">
+
+                    <?php foreach($photo->post->comments->take(5)->reverse() as $comment): ?>
+
+                        <?php if ($photo->post->type == 'page' and $photo->post->page->user->id == $comment->user->id): ?>
+                            <?php echo Theme::section('comment.display-page', ['comment' => $comment, 'page' => $photo->post->page]); ?>
+                        <?php else: ?>
+
+                            <?php echo Theme::section('comment.display', ['comment' => $comment]); ?>
+                        <?php endif; ?>
+
+                    <?php endforeach; ?>
+                </div>
+            <?php else: ?>
+                <?php if($photo->countComments() > 5): ?>
+                <a href="" class="load-more-comment" data-target="#photo-post-replies"><i class="icon ion-more"></i> View more comments <img class="indicator" src="<?php echo Theme::asset()->img('theme/images/loading.gif'); ?>"/></a>
+                <?php endif; ?>
+                <div id="photo-<?php echo $photo->id; ?>-reply-lists" class="replies-list">
+
+                    <?php foreach($photo->comments->take(5)->reverse() as $comment): ?>
+
+                    <?php echo Theme::section('comment.display', ['comment' => $comment]); ?>
+
+                    <?php endforeach; ?>
+                </div>
+            <?php endif; ?>
+
+
+</div>

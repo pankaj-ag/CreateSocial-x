@@ -1,0 +1,28 @@
+<div class="chatbox-container">
+    <a class="opener" href=""><i class="icon ion-ios7-person"></i> <?php echo trans('message.friends-online'); ?> (<span class="friends-online-count"><?php echo app('App\\Repositories\\UserRepository')->countFriendsOnline(); ?></span>)
+
+    </a>
+    <div class="dropdown chat-online-status clearfix">
+        <span ><?php echo trans('message.status'); ?> : <span class="online-status">
+                <?php $status = \Auth::user()->present()->isOnline()?>
+                <?php if($status == 1): ?>
+                    <?php echo trans('message.online'); ?>
+                <?php elseif($status == 2): ?>
+                    <?php echo trans('message.busy'); ?>
+                <?php else: ?>
+                    <?php echo trans('message.offline'); ?>
+                <?php endif; ?>
+        </span></span>
+        <a data-toggle="dropdown"  href="" class="btn btn-xs btn-default dropdown-toggle pull-right"><?php echo trans('message.change'); ?></a>
+        <ul class="dropdown-menu pull-right">
+            <li><a data-value="1"  href=""><?php echo trans('message.online'); ?></a> </li>
+            <li><a data-value="2" href=""><?php echo trans('message.busy'); ?></a> </li>
+            <li><a data-value="0" href=""><?php echo trans('message.offline'); ?></a> </li>
+        </ul>
+    </div>
+    <div class="chat-list">
+        <?php echo Theme::section('messages.online', [
+        'users' => app('App\Repositories\UserRepository')->listOnlineUsers()
+        ]);; ?>
+    </div>
+</div>
